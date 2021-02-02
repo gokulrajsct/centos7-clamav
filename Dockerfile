@@ -1,12 +1,8 @@
-  
+
 FROM centos:centos7
-
-
-
 
 RUN    rpm --import http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7 \
     && yum -y install epel-release \
-    && yum -y update \
     && yum -y install clamav-update clamd \
     && yum clean all
 
@@ -29,7 +25,8 @@ RUN    set -x \
             s/#DetectBrokenExecutables/DetectBrokenExecutables/g; \
             ' /etc/clamd.d/scan.conf \
     \
-    && ln -s /etc/clamd.d/scan.conf /etc/clamd.conf
+    && ln -s /etc/clamd.d/scan.conf /etc/clamd.conf \
+    && chgrp -R 0 /etc
 
 VOLUME ["/var/lib/clamav"]
 
