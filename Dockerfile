@@ -16,7 +16,7 @@ RUN    set -x \
     && curl -O http://database.clamav.net/daily.cvd \
     && curl -O http://database.clamav.net/bytecode.cvd \
     && curl -O http://database.clamav.net/safebrowsing.cvd \
-    && chown clamupdate:clamupdate main.cvd daily.cvd bytecode.cvd safebrowsing.cvd \
+    && chgrp -R 0 main.cvd daily.cvd bytecode.cvd safebrowsing.cvd \
     \
     && sed -ri ' \
             s/Example/#Example/g; \
